@@ -1,44 +1,48 @@
 name: Metrics
 
 on:
-  schedule: [{cron: "0 * * * *"}]
+  schedule:
+    - cron: "0 * * * *"
   workflow_dispatch:
-    push: {branches: ["main"]}
+  push:
+    branches:
+      - main
 
 jobs:
 
-  # achievements:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/achievements.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         base: achievements
-  #         plugin_achievements: yes
-  #         plugin_achievements_threshold: B
-  #         plugin_achievements_secrets: yes
-  #         plugin_achievements_display: compact
-  #         plugin_achievements_limit: 0
+  # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md
+  achievements:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/achievements.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
 
-  # github-metrics:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/header.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         template: classic
-  #         base: header
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
+          # Options
+          user: jacobwyke
+          base: achievements
+          plugin_achievements: yes
+          plugin_achievements_threshold: B
+          plugin_achievements_secrets: yes
+          plugin_achievements_display: compact
+          plugin_achievements_limit: 0
+
+  github-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/header.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Options
+          user: jacobwyke
+          template: classic
+          base: header
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
 
   # https://github.com/lowlighter/metrics/blob/master/source/plugins/lines/README.md
   lines:
@@ -54,86 +58,89 @@ jobs:
           base: repositories
           plugin_lines: yes
 
-  # acti_comm:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/acti_comm.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         template: classic
-  #         base: activity, community
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
+  acti_comm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/acti_comm.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
 
-  # iso_calender:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/iso_calender.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         template: classic
-  #         base: ""
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
-  #         plugin_isocalendar: yes
-  #         plugin_isocalendar_duration: half-year
+          # Options
+          user: jacobwyke
+          template: classic
+          base: activity, community
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
 
-  # habits:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/github-habits.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         base: ""
-  #         template: classic
-  #         plugin_habits: yes
-  #         plugin_habits_from: 200       # Use 200 events to compute habits
-  #         plugin_habits_days: 14        # Keep only events from last 14 days
-  #         plugin_habits_charts: yes     # Display charts section
-  #         plugin_habits_trim: yes       # Trim unused hours on daily chart
+  # https://github.com/lowlighter/metrics/blob/master/source/plugins/isocalendar/README.md
+  iso_calender:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/iso_calender.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
 
-  # issue_pr_lang:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/issue_pr_lang.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         template: classic
-  #         base: ""
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
-  #         plugin_followup: yes
-  #         plugin_languages: yes
+          # Options
+          user: jacobwyke
+          template: classic
+          base: ""
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
 
-  # repositories:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: lowlighter/metrics@latest
-  #       with:
-  #         filename: img/repositories.svg
-  #         token: ${{ secrets.METRICS_TOKEN }}
-  #         committer_token: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #         # Options
-  #         user: jacobwyke
-  #         template: classic
-  #         base: ""
-  #         config_timezone: ${{ secrets.USER_TIMEZONE }}
+  # https://github.com/lowlighter/metrics/blob/master/source/plugins/habits/README.md
+  habits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/github-habits.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
+
+          # Options
+          user: jacobwyke
+          base: ""
+          template: classic
+          plugin_habits: yes
+          plugin_habits_from: 500
+          plugin_habits_days: 30
+          plugin_habits_charts: yes
+          plugin_habits_trim: yes
+
+  # https://github.com/lowlighter/metrics/blob/master/source/plugins/followup/README.md
+  issue_pr_lang:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/issue_pr_lang.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Options
+          user: jacobwyke
+          template: classic
+          base: ""
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          plugin_followup: yes
+          plugin_languages: yes
+
+  repositories:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: img/repositories.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Options
+          user: jacobwyke
+          template: classic
+          base: ""
+          config_timezone: ${{ secrets.USER_TIMEZONE }}
