@@ -51,7 +51,7 @@ jobs:
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
           # Options
-          base: "Organizations"
+          base: "users"
           plugin_lines: yes
 
   # acti_comm:
